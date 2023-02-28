@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -20,7 +21,7 @@ public class Offer {
 
     private Integer quantity;
 
-    private String deliveryTime;
+    private LocalDateTime deliveryTime;
 
     @Enumerated(EnumType.STRING)
     private OfferStatus status;

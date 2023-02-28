@@ -1,6 +1,7 @@
 package com.spring.cocomarket.services;
 
 import com.spring.cocomarket.Iservices.IOfferService;
+import com.spring.cocomarket.algorithms.BestOfferAlgorithm;
 import com.spring.cocomarket.entities.Offer;
 import com.spring.cocomarket.repositories.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,13 @@ public class OfferServiceImpl implements IOfferService {
     public void deleteOffer(int id) {
         offerRepository.deleteById(id);
     }
+
+    @Override
+    public Offer getBestOffer() {
+        List<Offer> allOffers = getAllOffers();
+        BestOfferAlgorithm algorithm = new BestOfferAlgorithm();
+        return algorithm.getBestOffer(allOffers);
+    }
+
 }
 

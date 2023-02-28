@@ -15,5 +15,8 @@ public interface IOfferService {
     Offer updateOffer(Offer offer);
 
     void deleteOffer(int id);
+
+    Offer getBestOffer();
+
 }
 

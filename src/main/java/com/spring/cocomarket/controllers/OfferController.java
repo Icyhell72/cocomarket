@@ -3,6 +3,8 @@ package com.spring.cocomarket.controllers;
 import com.spring.cocomarket.Iservices.IOfferService;
 import com.spring.cocomarket.entities.Offer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +16,12 @@ public class OfferController {
 
     @Autowired
     private IOfferService offerService;
+
+
+    @Autowired
+    public OfferController(IOfferService offerService) {
+        this.offerService = offerService;
+    }
 
     @GetMapping("/{id}")
     public Optional<Offer> getOfferById(@PathVariable int id) {
@@ -39,4 +47,16 @@ public class OfferController {
     public void deleteOffer(@PathVariable int id) {
         offerService.deleteOffer(id);
     }
+
+
+    @GetMapping("/best")
+    public ResponseEntity<Offer> getBestOffer() {
+        Offer bestOffer = offerService.getBestOffer();
+        if (bestOffer == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(bestOffer, HttpStatus.OK);
+        }
+    }
+
 }
